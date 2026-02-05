@@ -75,22 +75,45 @@
     }
     ul.people-list li {
       background: white;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-      transition: transform 0.2s, box-shadow 0.2s;
+      padding: 25px 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      transition: transform 0.25s, box-shadow 0.25s;
+      text-align: center;           /* Center text and image */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
     }
     ul.people-list li:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+      transform: translateY(-6px);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.12);
     }
-    ul.people-list a {
+    ul.people-list li a {
       color: var(--primary);
       text-decoration: none;
       font-weight: 600;
+      font-size: 1.2rem;            /* Slightly larger name */
+      margin-bottom: 6px;
+      display: block;
     }
-    ul.people-list a:hover {
+    ul.person-img {
+      width: 140px;                 /* Adjust size as needed */
+      height: 140px;
+      border-radius: 50%;           /* Circular crop */
+      object-fit: cover;            /* Fill without distortion */
+      margin-bottom: 16px;          /* Space below image */
+      border: 3px solid #e2e8f0;    /* Subtle border for polish */
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    ul.people-list li a:hover {
       text-decoration: underline;
+    }
+    ul.people-list li p {
+      color: #4a5568;
+      font-size: 0.95rem;
+      margin: 0;
+      line-height: 1.4;
     }
     .contribution {
       max-width: 900px;
@@ -285,7 +308,22 @@
       </ul>
     </div>
   </section>
-
+  
+<!-- For Organizers section (same structure) -->
+<section>
+  <div class="container">
+    <h2>Organizers</h2>
+    <ul class="people-list">
+      <li>
+        <img src="Image/Pakpong.jpg" alt="Organizer One" class="person-img">
+        <a href="https://www.mie.utoronto.ca/faculty_staff/pakpong-chirarattananon/" target="_blank">Pakpong Chirarattananon – University of Toronto, Canada</a>
+        <p>Affiliation, Country</p>
+      </li>
+      <!-- Add more -->
+    </ul>
+  </div>
+</section>
+  
   <footer>
     <div class="container">
       <p>&copy; RoboSoft 2026 Workshop Organizing Team. Hosted on GitHub Pages.</p>
@@ -295,6 +333,7 @@
 
 </body>
 </html>
+
 
 
 
