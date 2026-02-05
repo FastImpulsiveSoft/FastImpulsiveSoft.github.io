@@ -111,6 +111,17 @@
       margin: 0;
       line-height: 1.4;
     }
+
+    ul.people-list {
+      list-style: none;
+      padding: 0;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);  /* Exactly 3 columns on wide screens */
+      gap: 30px;                              /* Increased gap for better breathing room */
+      max-width: 1200px;                      /* Slightly wider container for 3 items */
+      margin: 0 auto;
+    }
+    
     .contribution {
       max-width: 900px;
       margin: 0 auto;
@@ -169,10 +180,15 @@
       h2 { font-size: 2rem; }
       .container { padding: 0 15px; }
     }
-    @media (min-width: 768px) {
-      .person-img {
-        width: 160px;
-        height: 160px;
+    @media (max-width: 1024px) {
+      ul.people-list {
+        grid-template-columns: repeat(2, 1fr);  /* 2 columns on tablets/laptops */
+      }
+    }
+
+    @media (max-width: 768px) {
+      ul.people-list {
+        grid-template-columns: 1fr;             /* 1 column on mobile */
       }
     }
   </style>
@@ -401,6 +417,7 @@
 
 </body>
 </html>
+
 
 
 
