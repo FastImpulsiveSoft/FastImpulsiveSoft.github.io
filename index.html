@@ -74,7 +74,8 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: flex-start;
+      justify-content: space-between;
+      height: 100%;
     }
     
     .people-list li:hover {
@@ -120,6 +121,8 @@
       gap: 30px;                              /* Increased gap for better breathing room */
       max-width: 1200px;                      /* Slightly wider container for 3 items */
       margin: 0 auto;
+      justify-items: center;                    /* Centers items within their grid cells */
+      justify-content: center;                  /* Centers the entire grid if fewer items */
     }
     
     .contribution {
@@ -393,6 +396,7 @@
 
 </body>
 </html>
+
 
 
 
