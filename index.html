@@ -13,12 +13,16 @@
       --light-bg: #f7fafc;
       --border: #e2e8f0;
     }
+    html {
+      scroll-behavior: smooth;
+    }
     body {
       margin: 0;
       font-family: 'Inter', sans-serif;
       color: var(--text);
       background: #fff;
       line-height: 1.7;
+      padding-top: 70px;  /* Adjust based on your nav height; test on desktop/mobile */
     }
     h1, h2 {
       font-family: 'Libre Baskerville', serif;
@@ -185,10 +189,57 @@
       padding: 30px 0;
       font-size: 0.95rem;
     }
+    /* Nav bar styles */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: white;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+      z-index: 1000;  /* Stays on top of everything */
+      padding: 15px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .navbar .container {
+      display: flex;
+      justify-content: center;  /* Center links */
+      align-items: center;
+    }
+    
+    .navbar ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      gap: 40px;  /* Space between links */
+    }
+    
+    .navbar li a {
+      color: var(--primary);  /* Your blue accent */
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.1rem;
+      transition: color 0.2s;
+    }
+    
+    .navbar li a:hover,
+    .navbar li a.active {  /* Optional: highlight current section */
+      color: #000;
+      text-decoration: underline;
+    }
     @media (max-width: 768px) {
       h1 { font-size: 2.6rem; }
       h2 { font-size: 2rem; }
       .container { padding: 0 15px; }
+      .navbar ul {
+      flex-direction: column;
+      gap: 15px;
+      text-align: center;}
+      body {
+        padding-top: 120px;  /* More space on mobile if stacked */
+      }
     }
     @media (max-width: 1024px) {
       ul.people-list {
@@ -212,8 +263,19 @@
   </style>
 </head>
 <body>
-
-  <header>
+<nav class="navbar">
+  <div class="container">
+    <ul>
+      <li><a href="#home">Introduction</a></li>
+      <li><a href="#speakers">Speakers</a></li>
+      <li><a href="#call-for-contributions">Contribution</a></li>
+      <li><a href="#schedule">Schedule</a></li>
+      <li><a href="#organizers">Organizers</a></li>
+    </ul>
+  </div>
+</nav>
+  
+  <header id="home">
     <div class="container">
       <h1>Fast and impulsive robots enabled by soft actuators and mechanisms</h1>
       <p class="subtitle">RoboSoft 2026 Workshop, April 7th Morning, Hotel Kanazawa.</p>
@@ -227,7 +289,7 @@
     </div>
   </header>
 
-  <section>
+  <section id="speakers">
     <div class="container">
       <h2>Speakers</h2>
       <ul class="people-list">
@@ -275,7 +337,7 @@
     </div>
   </section>
 
-  <section>
+  <section id="call-for-contributions">
     <div class="container">
       <h2>Call for Contributions</h2>
       <div class="contribution">
@@ -293,7 +355,7 @@
     </div>
   </section>
 
-  <section>
+  <section id="schedule">
     <div class="container">
       <h2>Tentative Schedule</h2>
       <table>
@@ -364,7 +426,7 @@
   </section>
   
 <!-- For Organizers section (same structure) -->
-<section>
+<section id="organizers">
   <div class="container">
     <h2>Organizers</h2>
     <ul class="people-list">
@@ -413,6 +475,7 @@
 
 </body>
 </html>
+
 
 
 
