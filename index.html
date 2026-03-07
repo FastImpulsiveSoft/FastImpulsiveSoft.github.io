@@ -433,6 +433,30 @@
         <img src="Background3.png" alt="Teaser Image" style="max-width:56%; border-radius:12px; margin-top:10px;">
       </div>
     </div>
+
+     <div class="carousel" id="carousel">
+        <!-- 图片滑动轨道 -->
+        <div class="carousel-inner" id="carouselInner">
+            <!-- 三张GIF示例 (均为维基共享的动图，放心使用) -->
+            <img src="https://upload.wikimedia.org/wikipedia/commons/2/2c/Rotating_earth_%28large%29.gif" 
+                 alt="Rotating Earth - GIF" 
+                 loading="lazy">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/3/3f/Bouncing_ball_sequence.gif" 
+                 alt="Bouncing ball animation" 
+                 loading="lazy">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/9/9a/IBM_PC_5150.gif" 
+                 alt="IBM PC 5150 - vintage tech" 
+                 loading="lazy">
+            <!-- 你可以在此添加更多GIF，JS会自动适应数量 -->
+        </div>
+
+        <!-- 左右切换按钮 -->
+        <button class="carousel-prev" id="prevBtn" aria-label="上一张">‹</button>
+        <button class="carousel-next" id="nextBtn" aria-label="下一张">›</button>
+
+        <!-- 小圆点容器 (JS动态生成) -->
+        <div class="carousel-dots" id="dotsContainer"></div>
+    </div>   
   </header>
 
   <section id="speakers">
@@ -644,6 +668,7 @@
 </script>
 </body>
 </html>
+
 
 
 
