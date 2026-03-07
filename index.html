@@ -23,6 +23,9 @@
       background: #fff;
       line-height: 1.7;
       padding-top: 70px;  /* Adjust based on your nav height; test on desktop/mobile */
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
     h1, h2 {
       font-family: 'Libre Baskerville', serif;
@@ -232,6 +235,149 @@
       color: #000;
       text-decoration: underline;
     }
+
+/* 轮播主容器 */
+        .carousel {
+            position: relative;
+            width: 100%;
+            max-width: 900px;          /* 可根据需要调整 */
+            border-radius: 28px;
+            background: #2c3e4e;
+            box-shadow: 0 25px 40px -10px rgba(0, 0, 0, 0.7), 
+                        0 0 0 2px rgba(255, 215, 0, 0.2) inset;
+            overflow: hidden;
+            transition: box-shadow 0.3s;
+        }
+
+        .carousel:hover {
+            box-shadow: 0 30px 50px -8px black, 0 0 0 3px #f1c40f inset;
+        }
+
+        /* 图片滑动区域 */
+        .carousel-inner {
+            display: flex;
+            transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            will-change: transform;
+        }
+
+        /* 每一张GIF图片 */
+        .carousel-inner img {
+            flex: 0 0 100%;             /* 每次完整显示一张 */
+            width: 100%;
+            height: 500px;               /* 固定高度，确保gif区域整齐 */
+            object-fit: cover;            /* 覆盖容器，可能会裁剪，但保证不留白 */
+            object-position: center;
+            background-color: #1e2b36;    /* 图片加载时或透明区域底色 */
+            display: block;
+            user-select: none;
+            pointer-events: none;          /* 避免拖动图片干扰点击 */
+        }
+
+        /* 左右箭头按钮 */
+        .carousel-prev,
+        .carousel-next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 52px;
+            height: 52px;
+            background: rgba(20, 30, 40, 0.75);
+            backdrop-filter: blur(4px);
+            border: 2px solid rgba(255, 215, 0, 0.6);
+            border-radius: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 38px;
+            font-weight: 400;
+            color: #ffd966;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            z-index: 15;
+            line-height: 1;
+            padding-bottom: 6px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+        }
+
+        .carousel-prev {
+            left: 18px;
+        }
+
+        .carousel-next {
+            right: 18px;
+        }
+
+        .carousel-prev:hover,
+        .carousel-next:hover {
+            background: #f1c40f;
+            border-color: #ffffff;
+            color: #0f1a1f;
+            transform: translateY(-50%) scale(1.08);
+            box-shadow: 0 0 20px #ffd966;
+        }
+
+        .carousel-prev:active,
+        .carousel-next:active {
+            transform: translateY(-50%) scale(0.95);
+            background: #d4ac0d;
+        }
+
+        /* 小圆点指示器 */
+        .carousel-dots {
+            position: absolute;
+            bottom: 18px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            gap: 14px;
+            z-index: 20;
+            padding: 6px 0;
+        }
+
+        .dot {
+            width: 14px;
+            height: 14px;
+            background-color: rgba(230, 240, 255, 0.45);
+            border-radius: 30px;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.7);
+        }
+
+        .dot.active {
+            background-color: #f1c40f;
+            width: 36px;
+            border-color: #ffffffdd;
+            box-shadow: 0 0 15px #ffb700;
+        }
+
+        .dot:hover {
+            background-color: #ffe484;
+            transform: scale(1.2);
+            border-color: white;
+        }
+        /* 响应式微调 */
+        @media (max-width: 640px) {
+            .carousel-inner img {
+                height: 360px;
+            }
+            .carousel-prev,
+            .carousel-next {
+                width: 42px;
+                height: 42px;
+                font-size: 30px;
+            }
+            .dot {
+                width: 12px;
+                height: 12px;
+            }
+            .dot.active {
+                width: 32px;
+            }
+        }
+    
     @media (max-width: 768px) {
       h1 { font-size: 2.6rem; }
       h2 { font-size: 2rem; }
@@ -501,6 +647,7 @@
 </script>
 </body>
 </html>
+
 
 
 
