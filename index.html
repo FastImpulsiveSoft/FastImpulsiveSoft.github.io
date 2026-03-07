@@ -646,7 +646,7 @@
     </div>
   </footer>
 
-  <script>
+<script>
   const sections = document.querySelectorAll('section[id], header[id]');
   const navLinks = document.querySelectorAll('.navbar a');
   
@@ -666,9 +666,203 @@
       }
     });
   });
+
+
+          (function() {
+            // ----- 获取核心元素 -----
+            const carousel = document.getElementById('carousel');
+            const inner = document.getElementById('carouselInner');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const dotsContainer = document.getElementById('dotsContainer');
+
+            // 获取所有图片 (实时 NodeList，可自动更新)
+            const images = document.querySelectorAll('#carouselInner img');
+            const totalSlides = images.length;
+
+            // 防止没有图片导致错误 (若没有图片则隐藏控件)
+            if (totalSlides === 0) {
+                prevBtn.style.display = 'none';
+                nextBtn.style.display = 'none';
+                dotsContainer.style.display = 'none';
+                console.warn('没有检测到图片，请添加 <img> 标签');
+                return;
+            }
+
+            // ----- 状态变量 -----
+            let currentIndex = 0;                  // 当前显示第几张 (0开始)
+            let autoPlayInterval = null;            // 定时器ID
+            let isHovering = false;                 // 鼠标是否悬停在轮播上
+
+            // ----- 生成小圆点 -----
+            function createDots() {
+                dotsContainer.innerHTML = '';       // 清空
+                for (let i = 0; i < totalSlides; i++) {
+                    const dot = document.createElement('span');
+                    dot.classList.add('dot');
+                    if (i === currentIndex) dot.classList.add('active');
+                    dot.dataset.index = i;
+                    dot.setAttribute('aria-label', `切换到第${i+1}张`);
+                    dotsContainer.appendChild(dot);
+                }
+
+                // 绑定小圆点点击事件 (事件委托也可以，但直接绑更清晰)
+                document.querySelectorAll('.dot').forEach(dot => {
+                    dot.addEventListener('click', (e) => {
+                        const index = parseInt(e.currentTarget.dataset.index, 10);
+                        if (!isNaN(index) && index !== currentIndex) {
+                            // 手动点击圆点 -> 停止自动计时，跳转，然后根据鼠标状态决定是否重启自动
+                            stopAutoPlay();
+                            goToSlide(index);
+                            // 鼠标不在轮播上才重新启动自动播放
+                            if (!isHovering) startAutoPlay();
+                        }
+                    });
+                });
+            }
+
+            // ----- 更新轮播位置 (transform) 以及圆点激活状态 -----
+            function goToSlide(index) {
+                // 边界处理：循环
+                if (index < 0) {
+                    index = totalSlides - 1;
+                } else if (index >= totalSlides) {
+                    index = 0;
+                }
+
+                // 更新currentIndex
+                currentIndex = index;
+
+                // 移动 inner 容器
+                inner.style.transform = `translateX(-${currentIndex * 100}%)`;
+
+                // 更新小圆点 active 类
+                const dots = document.querySelectorAll('.dot');
+                dots.forEach((dot, i) => {
+                    if (i === currentIndex) {
+                        dot.classList.add('active');
+                    } else {
+                        dot.classList.remove('active');
+                    }
+                });
+            }
+
+            // ----- 下一张 (被定时器 & 下一张按钮调用) -----
+            function nextSlide() {
+                goToSlide(currentIndex + 1);
+            }
+
+            // ----- 上一张 -----
+            function prevSlide() {
+                goToSlide(currentIndex - 1);
+            }
+
+            // ----- 自动播放控制 -----
+            function startAutoPlay() {
+                // 如果已经有定时器，先清除
+                stopAutoPlay();
+                // 设置新定时器，每5000ms调用一次nextSlide
+                autoPlayInterval = setInterval(() => {
+                    nextSlide();
+                }, 5000); // 5秒
+            }
+
+            function stopAutoPlay() {
+                if (autoPlayInterval) {
+                    clearInterval(autoPlayInterval);
+                    autoPlayInterval = null;
+                }
+            }
+
+            // ----- 重置自动播放 (手动干预后调用: 先停止, 再按需启动) -----
+            function resetAutoPlayAfterManual() {
+                stopAutoPlay();
+                // 只有鼠标不在轮播区域时才重新启动
+                if (!isHovering) {
+                    startAutoPlay();
+                }
+            }
+
+            // ----- 事件绑定 -----
+
+            // 1. 左右箭头点击
+            prevBtn.addEventListener('click', () => {
+                prevSlide();
+                resetAutoPlayAfterManual();
+            });
+
+            nextBtn.addEventListener('click', () => {
+                nextSlide();
+                resetAutoPlayAfterManual();
+            });
+
+            // 2. 鼠标悬停功能：悬停时停止自动播放，移出后恢复
+            carousel.addEventListener('mouseenter', () => {
+                isHovering = true;
+                stopAutoPlay();
+            });
+
+            carousel.addEventListener('mouseleave', () => {
+                isHovering = false;
+                // 如果当前没有定时器，就启动自动播放
+                if (!autoPlayInterval) {
+                    startAutoPlay();
+                }
+            });
+
+            // 3. 初始化：生成点，显示第一张，启动自动播放 (假设初始鼠标不在轮播上)
+            createDots();
+            goToSlide(0); // 确保从第一张开始
+
+            // 初始自动播放 (如果鼠标一开始不在轮播区域内，但默认isHovering为false，所以启动)
+            // 但是为了避免鼠标刚刚好在轮播区域上 (比如刷新时鼠标就在上面)，检测一下真实悬停状态
+            // 可以用 document.querySelector(':hover') 但简单起见，我们延迟一丢丢检查 carousel 的悬停状态
+            setTimeout(() => {
+                // 检查鼠标是否真的在轮播里：利用matches
+                const hoverNow = carousel.matches(':hover');
+                if (!hoverNow) {
+                    startAutoPlay();
+                } else {
+                    isHovering = true;    // 更新标志，保持不自动播放
+                }
+            }, 100);
+
+            // 4. 可选：当窗口调整大小或图片数量变化时，无需特别处理，transform基于百分比
+
+            // 5. 增加键盘左右键支持 (无障碍)
+            window.addEventListener('keydown', (e) => {
+                // 如果焦点不在轮播内，可以忽略；也可以全局监听，但为友好仅在轮播相关区域触发
+                if (e.key === 'ArrowLeft') {
+                    // 防止页面滚动
+                    e.preventDefault();
+                    prevSlide();
+                    resetAutoPlayAfterManual();
+                } else if (e.key === 'ArrowRight') {
+                    e.preventDefault();
+                    nextSlide();
+                    resetAutoPlayAfterManual();
+                }
+            });
+
+            // 为了不干扰页面滚动，只有在轮播区域获得焦点时才允许键盘？简单起见做了全局，并阻止默认
+            // 但可能会影响其他左右键操作，用户可自行取舍，这里保留。
+
+            // 额外细节：如果图片数量只有1张，隐藏按钮和点，且不自动播放
+            if (totalSlides === 1) {
+                prevBtn.style.display = 'none';
+                nextBtn.style.display = 'none';
+                dotsContainer.style.display = 'none';
+                stopAutoPlay(); // 无需自动
+                // 可以关掉定时器
+            }
+
+            // 当图片数量变化时(理论上不会动态变)，但若你通过js增减图片，可重新调用createDots并更新totalSlides
+            // 为了健壮，可以添加一个观察者，但是本示例不做复杂处理。
+        })();
 </script>
 </body>
 </html>
+
 
 
 
