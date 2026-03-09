@@ -234,44 +234,45 @@
     }
 
 /* Carousel container */
+/* Carousel container */
 .carousel {
   position: relative;
   width: 100%;
-  max-width: 1200px; /* Increased for better visibility of multiple GIFs; adjust if needed */
-  overflow: hidden; /* Hide overflow for seamless scroll */
-  border-radius: 12px; /* Softer corners for academic look */
-  background: #2c3e4e; /* Dark background to make GIFs pop */
+  max-width: 1200px; /* Adjust as needed */
+  overflow: hidden;
+  border-radius: 12px;
+  background: #2c3e4e;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-  margin: 20px auto; /* Center and space from text */
+  margin: 20px auto;
 }
 
 /* Inner container for rolling animation */
 .carousel-inner {
-  display: flex; /* Horizontal row */
-  animation: roll 10s linear infinite; /* Faster: 10s per cycle; tweak this value */
-  will-change: transform; /* Optimize for animation */
+  display: flex;
+  animation: roll 20s linear infinite; /* Your calculated duration; adjust if needed */
+  will-change: transform;
 }
 
 /* Each GIF */
 .carousel-inner img {
-  flex: 0 0 auto; /* Don't shrink; fixed width based on height */
-  height: 250px; /* Slightly smaller to fit more/avoid cropping; adjust */
-  width: auto; /* Maintain aspect ratio */
-  object-fit: contain; /* Show full GIF without cropping */
-  margin: 8px; /* Reduced space for tighter rolling */
-  border-radius: 8px; /* Subtle rounding */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Depth */
-  background-color: #1e2b36; /* Fallback for loading */
+  flex: 0 0 auto;
+  height: 250px;
+  width: auto;
+  object-fit: contain;
+  margin: 8px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  background-color: #1e2b36;
   user-select: none;
 }
 
-/* Infinite rolling animation (moves left; reverse for right-to-left if needed) */
+/* Infinite rolling animation */
 @keyframes roll {
   0% {
     transform: translateX(0);
   }
   100% {
-    transform: translateX(-50%); /* Halfway, since images are duplicated */
+    transform: translateX(var(--end-translate, -50%)); /* Dynamic via JS; default -50% */
   }
 }
 
@@ -283,10 +284,10 @@
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .carousel-inner img {
-    height: 180px; /* Even smaller on mobile */
+    height: 180px;
   }
   .carousel-inner {
-    animation-duration: 8s; /* Slightly faster on small screens */
+    animation-duration: 16s; /* Slightly faster on mobile */
   }
 }
 
@@ -568,14 +569,46 @@
       }
     });
   });
-// Carousel: Duplicate images for infinite rolling loop
-  (function() {
-    const inner = document.getElementById('carouselInner');
-    if (!inner) return; // Safety check
+// Carousel: Dynamic duplication for seamless infinite rolling
+(function() {
+  const carousel = document.getElementById('carousel');
+  const inner = document.getElementById('carouselInner');
+  if (!carousel || !inner) return; // Safety check
 
-    const images = inner.innerHTML; // Get original images HTML
-    inner.innerHTML += images; // Duplicate for seamless loop (now 8 images total)
-  })();
+  const images = Array.from(inner.querySelectorAll('img'));
+  if (images.length === 0) return;
+
+  // Wait for all images to load to get accurate widths
+  Promise.all(images.map(img => new Promise(resolve => {
+    if (img.complete) resolve();
+    else img.addEventListener('load', resolve);
+  }))).then(() => {
+    const originalHTML = inner.innerHTML; // Original set
+    const carouselWidth = carousel.offsetWidth;
+
+    // Calculate total width of original set
+    let originalWidth = 0;
+    images.forEach(img => {
+      originalWidth += img.offsetWidth + (parseFloat(getComputedStyle(img).marginLeft) || 0) * 2; // Include margins
+    });
+
+    // Determine how many duplicates needed (at least 1, more if original is shorter than viewport)
+    let duplicatesNeeded = Math.ceil((carouselWidth * 2) / originalWidth); // Enough for 2x viewport
+    if (duplicatesNeeded < 1) duplicatesNeeded = 1; // Minimum 1 duplicate
+
+    // Append duplicates
+    for (let i = 0; i < duplicatesNeeded; i++) {
+      inner.innerHTML += originalHTML;
+    }
+
+    // Total multiplier (original + duplicates)
+    const totalMultiplier = 1 + duplicatesNeeded;
+
+    // Set the end translate: -(100% - 100%/multiplier)
+    const endTranslate = -(100 - (100 / totalMultiplier));
+    inner.style.setProperty('--end-translate', `${endTranslate}%`);
+  });
+})();
 
 
 
@@ -583,6 +616,7 @@
 </script>
 </body>
 </html>
+
 
 
 
