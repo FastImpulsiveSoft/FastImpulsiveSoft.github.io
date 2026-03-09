@@ -233,61 +233,62 @@
       text-decoration: underline;
     }
 
-        .carousel {
-          position: relative;
-          width: 100%;
-          max-width: 1000px; /* Wider for rolling effect; adjust to fit your intro width */
-          overflow: hidden; /* Hide overflow for seamless scroll */
-          border-radius: 12px; /* Softer corners for academic look */
-          background: #2c3e4e; /* Dark background to make GIFs pop */
-          box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-          margin: 20px auto; /* Center and space from text */
-        }
-        .carousel:hover {
-            box-shadow: 0 30px 50px -8px black, 0 0 0 3px #f1c40f inset;
-        }
+/* Carousel container */
+.carousel {
+  position: relative;
+  width: 100%;
+  max-width: 1200px; /* Increased for better visibility of multiple GIFs; adjust if needed */
+  overflow: hidden; /* Hide overflow for seamless scroll */
+  border-radius: 12px; /* Softer corners for academic look */
+  background: #2c3e4e; /* Dark background to make GIFs pop */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  margin: 20px auto; /* Center and space from text */
+}
 
-        .carousel-inner {
-          display: flex; /* Horizontal row */
-          animation: roll 25s linear infinite; /* 20s speed; adjust for faster/slower */
-          will-change: transform; /* Optimize for animation */
-        }
+/* Inner container for rolling animation */
+.carousel-inner {
+  display: flex; /* Horizontal row */
+  animation: roll 10s linear infinite; /* Faster: 10s per cycle; tweak this value */
+  will-change: transform; /* Optimize for animation */
+}
 
-          /* Each GIF */
-          .carousel-inner img {
-            flex: 0 0 auto; /* Don't shrink; fixed width based on height */
-            height: 300px; /* Smaller size; adjust as needed */
-            width: auto; /* Maintain aspect ratio */
-            object-fit: contain; /* Show full GIF without cropping */
-            margin: 10px; /* Space between images for breathing room */
-            border-radius: 8px; /* Subtle rounding */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Depth */
-            background-color: #1e2b36; /* Fallback for loading */
-            user-select: none;
-          }
-    /* Infinite rolling animation (moves left; reverse for right-to-left if needed) */
-            @keyframes roll {
-              0% {
-                transform: translateX(0);
-              }
-              100% {
-                transform: translateX(-50%); /* Halfway, since images are duplicated */
-              }
-            }
-              /* Pause on hover */
-          .carousel:hover .carousel-inner {
-            animation-play-state: paused;
-          }
-          
-          /* Responsive adjustments */
-          @media (max-width: 768px) {
-            .carousel-inner img {
-              height: 200px; /* Even smaller on mobile */
-            }
-            .carousel-inner {
-              animation-duration: 15s; /* Faster on small screens to see more */
-            }
-          }
+/* Each GIF */
+.carousel-inner img {
+  flex: 0 0 auto; /* Don't shrink; fixed width based on height */
+  height: 250px; /* Slightly smaller to fit more/avoid cropping; adjust */
+  width: auto; /* Maintain aspect ratio */
+  object-fit: contain; /* Show full GIF without cropping */
+  margin: 8px; /* Reduced space for tighter rolling */
+  border-radius: 8px; /* Subtle rounding */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Depth */
+  background-color: #1e2b36; /* Fallback for loading */
+  user-select: none;
+}
+
+/* Infinite rolling animation (moves left; reverse for right-to-left if needed) */
+@keyframes roll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%); /* Halfway, since images are duplicated */
+  }
+}
+
+/* Pause on hover */
+.carousel:hover .carousel-inner {
+  animation-play-state: paused;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .carousel-inner img {
+    height: 180px; /* Even smaller on mobile */
+  }
+  .carousel-inner {
+    animation-duration: 8s; /* Slightly faster on small screens */
+  }
+}
 
     
     @media (max-width: 768px) {
@@ -582,6 +583,7 @@
 </script>
 </body>
 </html>
+
 
 
 
