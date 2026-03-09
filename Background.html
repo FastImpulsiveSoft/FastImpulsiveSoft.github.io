@@ -1,109 +1,201 @@
-<!DOCTYPE HTML>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-		<title>More Information</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<meta name="keywords" content="fast,impulsive,soft" />
-		<link rel="stylesheet" href="assets/css/main.css" />
-	</head>
-	<body class="is-preload">
-
-		<!-- Wrapper -->
-			<div id="wrapper">
-
-				<!-- Main -->
-					<div id="main">
-						<div class="inner">
-
-							<!-- Header -->
-								<header id="header">
-									<a href="index.html" class="logo"><strong>Workshop: Fast and impulsive soft robots</strong></a>
-									<p>April 7th Morning, Hotel Kanazawa.</p>
-								</header>
-
-							<!-- Content -->
-								<section>
-									<header class="main">
-										<h2>Background</h2>
-									</header>
-									<p>Recent developments in soft robotic research have demonstrated remarkable properties such as large and continuous deformation, robustness in harsh environments, and safety in human-robot interactions. However, compared to animals, soft robots fall behind in speed, force, and precision. This performance gap represents an underexplored research area and marks an exciting opportunity – achieving animal-like fast and impulsive motion through developing bio-inspired soft materials, mechanisms, controllers, and systems. Through inviting interdisciplinary attendees from materials science, mechanism designs, and dynamics and control systems, this workshop aims to identify key challenges and opportunities in enabling animal-like agile and impulsive locomotion through actuation and mechanisms.</p>
-									<p>Specifically, our speakers will share results on the following topics: 1) soft functional materials and actuators, fabrication methods, geometric designs, and nonlinear control that lead to high bandwidth and precise actuation for high force manipulation and high speed locomotion; 2) bio-inspired compliant mechanisms and biomechanics that integrate energy storage and rapid release principles, drawing inspiration from muscles, tendons, and skeletal structures, to enable agile, high-force, and impulsive motions such as fast leaps and powerful jumps. We believe this workshop will provide a forum for an underexplored yet emerging area within soft robotics research, and has the potential to grow a new community consisting of interdisciplinary researchers.</p>
-
-								</section>
-									<header class="main">
-										<h2>Key questions</h2>
-									</header>
-									<p>(i) How can soft actuators and mechanisms be exploited and optimized for rapid motion?</p>
-									<p>(ii) What are the effective control strategies for impulsive and transient dynamics?</p>
-									<p>(iii) How can impulsive yet damage-tolerant soft systems be scaled and applied to real-world tasks?</p>
-									<!-- <span class="image main"><img src="Background4.png" alt="" /></span>-->
-						</div>
-					</div>
-
-				<!-- Sidebar -->
-					<div id="sidebar">
-						<div class="inner">
-
-
-							<!-- Menu -->
-								<nav id="menu">
-									<header class="major">
-										<h2>Links</h2>
-									</header>
-									<ul>
-										<li><a href="index.html#home">Homepage</a></li>
-										<li><a href="index.html#speakers">Speakers</a></li>
-										<li><a href="index.html#schedule">Schedule</a></li>
-										<li><a href="index.html#call-for-contributions">Contribution</a></li>
-										<li><a href="index.html#organizers">Organizers</a></li>
-
-									</ul>
-								</nav>
-
-
-							<!-- Section -->
-								<section>
-									<header class="major">
-										<h2>Get in touch</h2>
-									</header>
-									
-									<ul class="contact">
-										<li class="icon solid fa-envelope">ruoyu@mail.tsinghua.edu.cn</li>
-										<li class="icon solid fa-envelope">p.chirarattananon@utoronto.ca</li>
-									</ul>
-								</section>
-
-							<!-- Footer -->
-								<footer id="footer">
-									<p class="copyright">&copy; RoboSoft 2026 Workshop Organizing Team.</p>
-								</footer>
-
-						</div>
-					</div>
-
-			</div>
-
-		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
-
-	</body>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Background and Key Questions</title>
+  <meta name="keywords" content="fast,impulsive,soft" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/main.css" /> <!-- Keep if needed; overrides below -->
+  <style>
+    :root {
+      --primary: #2c5282; /* Academic blue from main site */
+      --text: #1a202c;
+      --light-bg: #f7fafc;
+      --border: #e2e8f0;
+    }
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      color: var(--text);
+      background: #fff;
+      line-height: 1.8; /* Increased for better readability */
+      font-size: 1.1rem; /* Standard body size */
+    }
+    h1, h2 {
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 700;
+      color: var(--primary);
+    }
+    h1 {
+      font-size: 2.8rem; /* Larger for main title */
+      margin-bottom: 20px;
+    }
+    h2 {
+      font-size: 2.2rem; /* Adjusted for subsections */
+      margin: 40px 0 20px;
+    }
+    p {
+      line-height: 1.8; /* Spacious line spacing */
+      text-align: justify; /* Academic-style justification */
+      margin-bottom: 1.5em;
+    }
+    ul {
+      line-height: 1.6; /* Adjusted for lists */
+      font-size: 1rem;
+      list-style: none;
+      padding-left: 0;
+    }
+    a {
+      color: var(--primary);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    a:hover {
+      color: #2a4365;
+      text-decoration: underline;
+    }
+    #wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      background: var(--light-bg); /* Light background for prettiness */
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1); /* Subtle shadow */
+      max-width: 1400px; /* Wider for academic feel */
+      margin: 40px auto;
+      padding: 40px;
+    }
+    #main {
+      flex: 3;
+      min-width: 70%;
+      padding: 20px;
+    }
+    #sidebar {
+      flex: 1;
+      min-width: 25%;
+      background: white;
+      padding: 20px;
+      border-left: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      height: fit-content;
+    }
+    #header {
+      text-align: center;
+      margin-bottom: 40px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border);
+    }
+    .logo {
+      font-size: 1.8rem;
+      color: var(--primary);
+    }
+    .major h2 {
+      font-size: 1.6rem;
+      color: var(--text);
+    }
+    .contact li {
+      margin-bottom: 10px;
+    }
+    .contact .icon {
+      margin-right: 8px;
+      color: var(--primary);
+    }
+    #footer {
+      text-align: center;
+      font-size: 0.9rem;
+      color: #4a5568;
+      margin-top: 20px;
+    }
+    @media (max-width: 768px) {
+      #wrapper {
+        flex-direction: column;
+        padding: 20px;
+      }
+      #sidebar {
+        border-left: none;
+        border-top: 1px solid var(--border);
+        position: static;
+      }
+      h1 { font-size: 2.4rem; }
+      h2 { font-size: 1.8rem; }
+      body { font-size: 1rem; }
+    }
+  </style>
+</head>
+<body class="is-preload">
+  <!-- Wrapper -->
+  <div id="wrapper">
+    <!-- Main -->
+    <div id="main">
+      <div class="inner">
+        <!-- Header -->
+        <header id="header">
+          <a href="index.html" class="logo"><strong>Workshop: Fast and impulsive soft robots</strong></a>
+          <p>April 7th Morning, Hotel Kanazawa.</p>
+        </header>
+        <!-- Content -->
+        <section>
+          <header class="main">
+            <h1>Background</h1> <!-- Upgraded to h1 for prominence -->
+          </header>
+          <p>Recent developments in soft robotic research have demonstrated remarkable properties such as large and continuous deformation, robustness in harsh environments, and safety in human-robot interactions. However, compared to animals, soft robots fall behind in speed, force, and precision. This performance gap represents an underexplored research area and marks an exciting opportunity – achieving animal-like fast and impulsive motion through developing bio-inspired soft materials, mechanisms, controllers, and systems. Through inviting interdisciplinary attendees from materials science, mechanism designs, and dynamics and control systems, this workshop aims to identify key challenges and opportunities in enabling animal-like agile and impulsive locomotion through actuation and mechanisms.</p>
+          <p>Specifically, our speakers will share results on the following topics: 1) soft functional materials and actuators, fabrication methods, geometric designs, and nonlinear control that lead to high bandwidth and precise actuation for high force manipulation and high speed locomotion; 2) bio-inspired compliant mechanisms and biomechanics that integrate energy storage and rapid release principles, drawing inspiration from muscles, tendons, and skeletal structures, to enable agile, high-force, and impulsive motions such as fast leaps and powerful jumps. We believe this workshop will provide a forum for an underexplored yet emerging area within soft robotics research, and has the potential to grow a new community consisting of interdisciplinary researchers.</p>
+          <!-- Optional image: Uncomment and style -->
+          <!-- <span class="image main"><img src="Background4.png" alt="Background Illustration" style="max-width: 100%; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" /></span> -->
+        </section>
+        <section>
+          <header class="main">
+            <h2>Key Questions</h2>
+          </header>
+          <p>(i) How can soft actuators and mechanisms be exploited and optimized for rapid motion?</p>
+          <p>(ii) What are the effective control strategies for impulsive and transient dynamics?</p>
+          <p>(iii) How can impulsive yet damage-tolerant soft systems be scaled and applied to real-world tasks?</p>
+        </section>
+      </div>
+    </div>
+    <!-- Sidebar -->
+    <div id="sidebar">
+      <div class="inner">
+        <!-- Menu -->
+        <nav id="menu">
+          <header class="major">
+            <h2>Links</h2>
+          </header>
+          <ul>
+            <li><a href="index.html#home">Homepage</a></li>
+            <li><a href="index.html#speakers">Speakers</a></li>
+            <li><a href="index.html#schedule">Schedule</a></li>
+            <li><a href="index.html#call-for-contributions">Contribution</a></li>
+            <li><a href="index.html#organizers">Organizers</a></li>
+          </ul>
+        </nav>
+        <!-- Section -->
+        <section>
+          <header class="major">
+            <h2>Get in Touch</h2>
+          </header>
+          <ul class="contact">
+            <li><i class="fas fa-envelope icon"></i> ruoyu@mail.tsinghua.edu.cn</li>
+            <li><i class="fas fa-envelope icon"></i> p.chirarattananon@utoronto.ca</li>
+          </ul>
+        </section>
+        <!-- Footer -->
+        <footer id="footer">
+          <p class="copyright">&copy; RoboSoft 2026 Workshop Organizing Team.</p>
+        </footer>
+      </div>
+    </div>
+  </div>
+  <!-- Scripts -->
+  <script src="assets/js/jquery.min.js"></script>
+  <script src="assets/js/browser.min.js"></script>
+  <script src="assets/js/breakpoints.min.js"></script>
+  <script src="assets/js/util.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
